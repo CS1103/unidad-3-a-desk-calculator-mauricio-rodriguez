@@ -33,7 +33,7 @@ double prim(bool get){
             ts.get();
             return v;}
         case Kind::name:{
-            double v= table[ts.current().string_value];
+            double &v= table[ts.current().string_value];
             if (ts.get().kind==Kind::assign)v=expr(true);
             return v;}
         case Kind::minus:

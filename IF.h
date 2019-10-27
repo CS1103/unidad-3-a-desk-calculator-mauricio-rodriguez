@@ -43,6 +43,8 @@ Token Token_stream::get()
                 ct.kind=Kind::name;
                 return ct;
             }
+            error("bad token");
+            return ct={Kind::print};
     }
 }
 
