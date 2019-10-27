@@ -1,26 +1,16 @@
 //
-// Created by mauri on 26/10/2019.
+// Created by mauri on 27/10/2019.
 //
-#include "Driver.cpp"
-double term(bool get){
-    double left=prim(get);
-    for (;;){
-        switch (ts.current().kind){
-            case Kind::mul:
-                left*=prim(true);
-                break;
-            case Kind::div:
-                if(auto d=prim(true)){
-                    left /=d;
-                    break;
-                }
-                return error("divide by 0");
-            default:
-                return left;
-        }
-    }
-}
-double expr(bool get){
+
+#ifndef DESKCALCULATOR_PARSER_H
+#define DESKCALCULATOR_PARSER_H
+
+#include "Table.h"
+#include "Errors.h"
+#include "IF.h"
+double term(bool b);
+
+double expr(bool get) {
     double left= term(get);
     for (;;){
         switch (ts.current().kind){
@@ -59,3 +49,22 @@ double prim(bool get){
     }
 }
 
+double term(bool get) {
+    double left=prim(get);
+    for (;;){
+        switch (ts.current().kind){
+            case Kind::mul:
+                left*=prim(true);
+                break;
+            case Kind::div:
+                if(auto d=prim(true)){
+                    left /=d;
+                    break;
+                }
+                return error("divide by 0");
+            default:
+                return left;
+        }
+    }
+}
+#endif //DESKCALCULATOR_PARSER_H

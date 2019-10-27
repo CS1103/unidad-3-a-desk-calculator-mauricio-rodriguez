@@ -23,11 +23,11 @@ private:
         bool owns;
         Token ct{Kind::end};
 public:
-    Token_stream(istream & s):ip{&s},owns{false}{}
-    Token_stream(istream *p):ip{p},owns{true}{}
+    explicit Token_stream(istream & s):ip{&s},owns{false}{}
+    explicit Token_stream(istream *p):ip{p},owns{true}{}
     ~Token_stream(){close();}
     Token get();
-    const Token& current();
+    const Token& current(){return ct;}
     void set_input(istream &s){close(); ip=&s;owns=false;}
     void set_input(istream *p){close();ip=p;owns=true;}
 };

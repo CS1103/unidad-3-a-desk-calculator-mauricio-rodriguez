@@ -1,6 +1,11 @@
+//
+// Created by mauri on 27/10/2019.
+//
+
+#ifndef DESKCALCULATOR_IF_H
+#define DESKCALCULATOR_IF_H
 
 #include "Token_stream.h"
-
 Token Token_stream::get()
 {
     char ch;
@@ -11,6 +16,20 @@ Token Token_stream::get()
         case ';':
         case '\n':
             return ct={Kind::print};
+        case '*':
+        case '/':
+        case '+':
+        case '-':
+        case '(':
+        case ')':
+        case '=':
+            return ct={static_cast<Kind>(ch)};
+        case '0': case '1': case'2': case '3': case '4': case'5':case '6':case '7': case '8': case '9':
+        case '.':
+            ip->putback(ch);
+            *ip>>ct.numer_value;
+            ct.kind=Kind::number;
+            return ct;
         default:
             if (isalpha(ch)){
                 ct.string_value=ch;
@@ -26,3 +45,5 @@ Token Token_stream::get()
             }
     }
 }
+
+#endif //DESKCALCULATOR_IF_H
