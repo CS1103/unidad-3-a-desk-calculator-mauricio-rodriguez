@@ -6,7 +6,6 @@
 #define DESKCALCULATOR_PARSER_H
 
 #include "Table.h"
-#include "Errors.h"
 #include "IF.h"
 double term(bool b);
 

@@ -5,7 +5,7 @@
 #ifndef DESKCALCULATOR_IF_H
 #define DESKCALCULATOR_IF_H
 
-#include "Token_stream.h"
+#include "Errors.h"
 Token Token_stream::get()
 {
     char ch;
